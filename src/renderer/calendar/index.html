@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:;" />
+  <title>일정 달력</title>
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="calendar.css" />
+</head>
+<body>
+  <div class="titlebar">
+    <span class="brand"><span class="dot"></span> 일정 달력</span>
+    <span class="spacer"></span>
+    <button class="winbtn" id="btn-min" title="최소화">&#8211;</button>
+    <button class="winbtn close" id="btn-close-win" title="닫기">&#10005;</button>
+  </div>
+
+  <main class="wrap">
+    <section class="cal">
+      <div class="cal-head">
+        <button class="nav" id="btn-prev" title="이전 달">&lsaquo;</button>
+        <h1 id="cal-title">2026년 9월</h1>
+        <button class="nav" id="btn-next" title="다음 달">&rsaquo;</button>
+        <button class="btn ghost today-btn" id="btn-today">오늘</button>
+      </div>
+      <div class="weekdays" id="weekdays"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <div class="bottom">
+    <section class="upcoming">
+      <h2>다가오는 일정</h2>
+      <ul class="up-list" id="upcoming-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2 id="panel-date">날짜를 선택하세요</h2>
+
+      <ul class="day-events" id="day-events"></ul>
+
+      <form class="add-form" id="add-form">
+        <p class="form-label" id="form-label">이 날짜에 일정 추가</p>
+        <input id="ev-title" type="text" maxlength="100" placeholder="제목" spellcheck="false" autocomplete="off" />
+        <textarea id="ev-content" rows="3" maxlength="2000" placeholder="내용 (선택)" spellcheck="false"></textarea>
+        <div class="form-row">
+          <button type="button" class="btn ghost" id="btn-cancel-edit" hidden>취소</button>
+          <button type="submit" class="btn primary" id="btn-submit" disabled>추가</button>
+        </div>
+        <p class="form-hint" id="form-hint"></p>
+      </form>
+    </section>
+    </div>
+  </main>
+
+  <script src="calendar.js"></script>
+</body>
+</html>

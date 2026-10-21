@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:;" />
+  <title>오늘의 체크리스트</title>
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="checklist.css" />
+</head>
+<body class="blocking">
+  <div class="titlebar" id="titlebar">
+    <span class="brand"><span class="dot"></span> Warn &amp; Alarm</span>
+    <span class="spacer"></span>
+    <button class="winbtn" id="btn-calendar-top" title="일정 달력">&#128197;</button>
+    <button class="winbtn" id="btn-settings" title="설정">&#9881;</button>
+    <button class="winbtn" id="btn-min" title="최소화">&#8211;</button>
+    <button class="winbtn close" id="btn-close-win" title="닫기">&#10005;</button>
+  </div>
+
+  <main class="stage">
+    <section class="card">
+      <header class="card-head">
+        <p class="date" id="date"></p>
+        <h1 id="headline">오늘 할 일을 마치고 시작해요</h1>
+        <p class="sub" id="sub">모든 항목을 체크해야 화면이 열립니다.</p>
+      </header>
+
+      <div class="progress">
+        <div class="progress-bar"><span id="progress-fill"></span></div>
+        <span class="progress-count" id="progress-count">0 / 0</span>
+      </div>
+
+      <div class="card-body" id="card-body">
+        <ul class="tasks" id="tasks"></ul>
+      </div>
+
+      <footer class="card-foot">
+        <button class="btn primary big" id="btn-finish" hidden>
+          <span class="check-ico">&#10003;</span> 모두 완료 · 닫기
+        </button>
+        <p class="foot-hint" id="foot-hint">항목을 눌러 체크하세요</p>
+      </footer>
+    </section>
+
+    <button class="escape-hatch" id="btn-escape">긴급 해제</button>
+  </main>
+
+  <!-- 긴급 해제 오버레이 -->
+  <div class="overlay" id="overlay" hidden>
+    <div class="modal">
+      <button class="modal-x" id="btn-cancel-x" title="취소">&#10005;</button>
+
+      <!-- 1단계 -->
+      <div class="step" data-step="1">
+        <h2>정말 긴급 상황인가요?</h2>
+        <p class="modal-desc">
+          긴급 해제는 오늘의 체크리스트를 건너뛰는 기능입니다.<br />
+          사용 기록이 설정 화면에 남습니다.
+        </p>
+        <button class="hold" id="hold-btn">
+          <span class="hold-fill" id="hold-fill"></span>
+          <span class="hold-label" id="hold-label">길게 눌러서 계속 (5초)</span>
+        </button>
+        <button class="btn ghost wide" id="btn-cancel-1">돌아가기</button>
+      </div>
+
+      <!-- 2단계 -->
+      <div class="step" data-step="2" hidden>
+        <h2>확인 절차</h2>
+        <p class="modal-desc">아래 코드를 그대로 입력하고, 사유를 20자 이상 적어주세요.</p>
+        <div class="code-box" id="code-box"></div>
+        <input id="code-input" type="text" placeholder="위 코드를 입력" autocomplete="off" spellcheck="false" />
+        <textarea id="reason-input" rows="3" placeholder="긴급한 이유 (20자 이상)"></textarea>
+        <p class="hint-row"><span id="reason-count">0 / 20자</span><span id="code-state"></span></p>
+        <div class="row">
+          <button class="btn ghost" id="btn-cancel-2">돌아가기</button>
+          <button class="btn" id="btn-step2-next" disabled>다음</button>
+        </div>
+      </div>
+
+      <!-- 3단계 -->
+      <div class="step" data-step="3" hidden>
+        <h2>얼마나 미룰까요?</h2>
+        <p class="modal-desc">선택한 시간이 지나면 체크리스트가 다시 화면을 가립니다.</p>
+        <div class="choices">
+          <button class="choice" data-minutes="15"><b>15분</b><span>잠깐만 급해요</span></button>
+          <button class="choice" data-minutes="60"><b>1시간</b><span>일정이 있어요</span></button>
+          <button class="choice danger" data-minutes=""><b>오늘 하루</b><span>다음 리셋 시각까지</span></button>
+        </div>
+        <button class="btn ghost wide" id="btn-cancel-3">돌아가기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="checklist.js"></script>
+</body>
+</html>

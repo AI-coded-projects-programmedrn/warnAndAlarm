@@ -1,0 +1,97 @@
+/* 스트레칭·체크리스트(앰버)와 확실히 구분되도록 남색 계열로 통일한다 */
+:root {
+  --night-bg: #171a2e;
+  --night-surface: #1e2240;
+  --night-line: #2f3560;
+  --night-text: #e6e6f2;
+  --night-dim: #9aa0c4;
+  --moon: #f4e8c6;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--night-bg);
+  color: var(--night-text);
+}
+
+.titlebar .brand { color: #6c7299; }
+.dot.moon { background: var(--moon); border-radius: 50%; }
+.winbtn:hover { background: var(--night-surface); }
+
+.stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 30px 28px;
+  text-align: center;
+  background:
+    radial-gradient(600px 380px at 50% 8%, rgba(120, 128, 220, 0.20), transparent 66%),
+    radial-gradient(420px 300px at 90% 104%, rgba(244, 232, 198, 0.06), transparent 62%);
+}
+
+.moon-art {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 14px;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.time {
+  margin: 0 0 6px;
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  color: var(--moon);
+  opacity: 0.85;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.message {
+  margin: 10px 0 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--night-dim);
+  max-width: 30ch;
+}
+
+.actions {
+  margin-top: 26px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.actions .wide { width: 100%; margin: 0; }
+
+.btn {
+  background: var(--night-surface);
+  border-color: var(--night-line);
+  color: var(--night-text);
+}
+.btn:hover { background: #262b50; }
+.btn.primary {
+  background: var(--moon);
+  border-color: var(--moon);
+  color: #2a2410;
+  font-weight: 700;
+  box-shadow: 0 10px 26px rgba(244, 232, 198, 0.18);
+}
+.btn.primary:hover { background: #fdf2d4; }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--night-dim); }
+.btn.ghost:hover { background: var(--night-surface); color: var(--night-text); }

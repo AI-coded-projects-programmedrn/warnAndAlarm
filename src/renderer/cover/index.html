@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' file:;" />
+  <title>Warn &amp; Alarm</title>
+  <link rel="stylesheet" href="../shared/base.css" />
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(900px 520px at 50% 40%, rgba(245, 187, 74, 0.07), transparent 60%),
+        var(--bg);
+    }
+    .cover { text-align: center; opacity: 0.9; }
+    .cover img { width: 76px; height: 76px; opacity: 0.9; }
+    .cover h1 { margin: 22px 0 8px; font-size: 20px; font-weight: 600; }
+    .cover p { margin: 0; color: var(--text-faint); font-size: 13.5px; }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <img src="../../assets/icon.png" alt="" />
+    <h1>오늘의 체크리스트를 진행 중입니다</h1>
+    <p>주 모니터에서 항목을 모두 체크하면 화면이 열립니다.</p>
+  </div>
+</body>
+</html>

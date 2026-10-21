@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' file:;" />
+  <title>취침 준비</title>
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="bedtime.css" />
+</head>
+<body>
+  <div class="titlebar">
+    <span class="brand"><span class="dot moon"></span> 취침 준비</span>
+    <span class="spacer"></span>
+    <button class="winbtn close" id="btn-close-win" title="닫기">&#10005;</button>
+  </div>
+
+  <main class="stage">
+    <img class="moon-art" src="../../assets/bedtime.png" alt="" />
+    <p class="time" id="time"></p>
+    <h1>취침 준비 시간이에요</h1>
+    <p class="message" id="message"></p>
+
+    <div class="actions">
+      <button class="btn primary wide" id="btn-ok">알겠어요, 준비할게요</button>
+      <button class="btn ghost wide" id="btn-snooze">조금 뒤에 다시 알려주기</button>
+    </div>
+  </main>
+
+  <script src="bedtime.js"></script>
+</body>
+</html>

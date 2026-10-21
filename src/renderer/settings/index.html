@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:;" />
+  <title>설정</title>
+  <link rel="stylesheet" href="../shared/base.css" />
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <div class="titlebar">
+    <span class="brand"><span class="dot"></span> 설정</span>
+    <span class="spacer"></span>
+    <button class="winbtn" id="btn-min" title="최소화">&#8211;</button>
+    <button class="winbtn close" id="btn-close-win" title="닫기">&#10005;</button>
+  </div>
+
+  <main class="scroll">
+    <section class="panel">
+      <h2>할 일 목록</h2>
+      <p class="desc">차단 화면에 표시할 항목입니다. 왼쪽 번호를 잡고 끌어서 순서를 바꿀 수 있어요.</p>
+      <ul class="items" id="items"></ul>
+      <div class="add-row">
+        <input id="new-task" type="text" placeholder="새 할 일 입력 후 Enter" maxlength="120" spellcheck="false" autocomplete="off" />
+        <button class="btn" id="btn-add">추가</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>시간</h2>
+
+      <div class="field">
+        <div class="field-text">
+          <label for="reset-time">하루 리셋 시각</label>
+          <p class="desc">이 시각이 지나면 체크가 모두 풀리고 화면을 다시 가립니다.</p>
+        </div>
+        <input id="reset-time" type="time" step="60" />
+      </div>
+
+      <div class="field">
+        <div class="field-text">
+          <label for="idle">자리 비움 판정</label>
+          <p class="desc">이 시간 동안 키보드·마우스 입력이 없으면 자리 비움 상태가 됩니다.</p>
+        </div>
+        <div class="num"><input id="idle" type="number" min="1" max="1440" /><span>분</span></div>
+      </div>
+
+      <div class="field">
+        <div class="field-text">
+          <label for="stretch">스트레칭 알림 간격</label>
+          <p class="desc">화면이 열린 시점과 자리 비움에서 돌아온 시점부터 이 간격으로 알림을 띄웁니다. 1분부터 지정할 수 있어요.</p>
+        </div>
+        <div class="num"><input id="stretch" type="number" min="1" max="1440" /><span>분</span></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>취침 준비 알림</h2>
+      <p class="desc">매일 정해둔 시각에 <b>화면 가운데 달 모양 창</b>으로 알려줍니다.
+        트레이에 잠깐 뜨는 스트레칭 알림과 달리, 누를 때까지 남아 있어 놓치기 어렵습니다.</p>
+
+      <label class="toggle-row">
+        <div class="field-text">
+          <span>취침 준비 알림 사용</span>
+          <p class="desc">끄면 창을 띄우지 않습니다.</p>
+        </div>
+        <input type="checkbox" id="bedtime-enabled" class="switch" />
+      </label>
+
+      <div class="field">
+        <div class="field-text">
+          <label for="bedtime-time">알림 시각</label>
+          <p class="desc">매일 이 시각에 한 번 띄웁니다.</p>
+        </div>
+        <input id="bedtime-time" type="time" step="60" />
+      </div>
+
+      <div class="field">
+        <div class="field-text">
+          <label for="bedtime-snooze">다시 알림 간격</label>
+          <p class="desc">창에서 '조금 뒤에 다시'를 눌렀을 때 기다리는 시간입니다.</p>
+        </div>
+        <div class="num"><input id="bedtime-snooze" type="number" min="1" max="240" /><span>분</span></div>
+      </div>
+
+      <div class="field column">
+        <div class="field-text">
+          <label for="bedtime-message">알림 문구</label>
+          <p class="desc">창에 표시할 문장입니다.</p>
+        </div>
+        <input id="bedtime-message" type="text" maxlength="120" spellcheck="false" />
+      </div>
+
+      <div class="io-row">
+        <button class="btn ghost" id="btn-bedtime-preview">지금 미리보기</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>동작</h2>
+      <label class="toggle-row">
+        <div class="field-text">
+          <span>스트레칭 알림 사용</span>
+          <p class="desc">끄면 알림을 보내지 않습니다.</p>
+        </div>
+        <input type="checkbox" id="stretch-enabled" class="switch" />
+      </label>
+      <div class="field">
+        <div class="field-text">
+          <label for="notify-mode">알림 방식</label>
+          <p class="desc">알림이 보이지 않으면 방식을 바꿔가며 <b>테스트</b>를 눌러보세요.
+            Windows는 설치하지 않고 실행할 때 시스템 알림이 무시되는 경우가 있습니다.</p>
+        </div>
+        <div class="num">
+          <select id="notify-mode">
+            <option value="auto">자동</option>
+            <option value="balloon">트레이 풍선</option>
+            <option value="system">시스템 알림</option>
+          </select>
+          <button class="btn small" id="btn-notify-test">테스트</button>
+        </div>
+      </div>
+      <label class="toggle-row">
+        <div class="field-text">
+          <span>차단 중 창 강제 유지</span>
+          <p class="desc">다른 창으로 전환해도 체크리스트를 다시 앞으로 가져옵니다.</p>
+        </div>
+        <input type="checkbox" id="enforce-focus" class="switch" />
+      </label>
+      <label class="toggle-row">
+        <div class="field-text">
+          <span>앱 시작 시 체크리스트 표시</span>
+          <p class="desc">끄면 트레이에만 상주하고 리셋 시각에만 화면을 가립니다.</p>
+        </div>
+        <input type="checkbox" id="show-on-startup" class="switch" />
+      </label>
+      <label class="toggle-row">
+        <div class="field-text">
+          <span>할 일을 마치면 달력 열기</span>
+          <p class="desc">매일 할 일을 끝내면 달력 창을 띄워 다가오는 일정을 보여줍니다.</p>
+        </div>
+        <input type="checkbox" id="open-calendar" class="switch" />
+      </label>
+    </section>
+
+    <section class="panel">
+      <h2>설정 내보내기 / 불러오기</h2>
+      <p class="desc">다른 컴퓨터로 옮길 때 쓰세요. 할 일 목록과 시간·동작 설정이 함께 옮겨집니다.
+        (오늘 체크한 내용과 긴급 해제 기록은 옮기지 않습니다)</p>
+      <div class="io-row">
+        <button class="btn" id="btn-export-file">파일로 내보내기</button>
+        <button class="btn" id="btn-import-file">파일에서 불러오기</button>
+      </div>
+      <textarea id="io-code" rows="3" spellcheck="false" autocomplete="off"
+                placeholder="설정 코드 (WA1- 로 시작). 여기에 붙여넣고 '코드 적용'을 누르세요."></textarea>
+      <div class="io-row">
+        <button class="btn ghost" id="btn-export-code">코드 만들기 + 복사</button>
+        <button class="btn ghost" id="btn-import-code">코드 적용</button>
+      </div>
+      <p class="io-state" id="io-state"></p>
+    </section>
+
+    <section class="panel">
+      <h2>긴급 해제 기록</h2>
+      <ul class="log" id="log"></ul>
+    </section>
+
+    <p class="path" id="path"></p>
+  </main>
+
+  <footer class="savebar">
+    <span class="save-state" id="save-state"></span>
+    <button class="btn ghost" id="btn-revert">되돌리기</button>
+    <button class="btn primary" id="btn-save">저장</button>
+  </footer>
+
+  <script src="settings.js"></script>
+</body>
+</html>

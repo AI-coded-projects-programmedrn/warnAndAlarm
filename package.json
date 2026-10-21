@@ -1,0 +1,60 @@
+{
+  "name": "warn-and-alarm",
+  "productName": "Warn & Alarm",
+  "version": "1.0.0",
+  "description": "매일 아침 체크리스트를 끝낼 때까지 화면을 잠그고, 자리 비움 후 복귀하면 스트레칭을 알려주는 데스크톱 앱",
+  "main": "src/main/main.js",
+  "author": "gurn",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "icons": "node scripts/make-icon.js",
+    "dist": "npm run icons && npm run cert && electron-builder --win --publish never",
+    "dist:portable": "npm run icons && npm run cert && electron-builder --win portable --publish never",
+    "postinstall": "node scripts/make-icon.js",
+    "cert": "node scripts/make-cert.js"
+  },
+  "devDependencies": {
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3",
+    "resedit": "^3.1.0"
+  },
+  "build": {
+    "appId": "com.gurn.warnandalarm",
+    "productName": "WarnAndAlarm",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Warn & Alarm"
+    },
+    "afterPack": "scripts/brand-exe.js",
+    "afterAllArtifactBuild": "scripts/sign-artifacts.js"
+  }
+}
